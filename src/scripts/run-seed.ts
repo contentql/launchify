@@ -17,6 +17,7 @@ import { seedHomePage } from '@/seed/home-page'
 import { seedPricingPage } from '@/seed/pricing'
 import { seedSiteSettingsGlobal } from '@/seed/site-settings'
 import { seedSupportPage } from '@/seed/support-page'
+import { seedTemplates } from '@/seed/templates'
 import { seedThemesPage } from '@/seed/themes-page'
 
 // ! For running shell commands (if needed for additional tasks)
@@ -74,6 +75,7 @@ const executeSeeding = async (): Promise<void> => {
   try {
     await seedHomePage(spinner)
     await seedFeaturesPage(spinner)
+    await seedTemplates(spinner)
     await seedSupportPage(spinner)
     await seedThemesPage(spinner)
     await seedPricingPage(spinner)

@@ -79,3 +79,72 @@ export const DeleteProjectSchema = z.object({
   projectId: z.string(),
 })
 export type DeleteProjectType = z.infer<typeof DeleteProjectSchema>
+
+export const CreateServiceSchema = z.object({
+  name: z.string(),
+  icon: z.string(),
+  projectId: z.string(),
+  environmentId: z.string(),
+  source: z.object({
+    image: z.string().optional().nullable(),
+    repo: z.string().optional().nullable(),
+  }),
+  variables: z.record(z.string(), z.string()),
+  networking: z
+    .object({
+      tcpProxies: z.record(z.unknown()).optional().nullable(),
+      serviceDomains: z
+        .record(z.object({ hasDomain: z.unknown().optional() }))
+        .optional()
+        .nullable(),
+    })
+    .optional(),
+})
+export type CreateServiceType = z.infer<typeof CreateServiceSchema>
+
+export const CreateDatabaseSchema = z.object({
+  name: z.string(),
+  icon: z.string(),
+  projectId: z.string(),
+  environmentId: z.string(),
+  variables: z.record(z.string(), z.string()).optional().nullable(),
+  source: z
+    .object({
+      image: z.string().optional().nullable(),
+    })
+    .optional(),
+})
+export type CreateDatabaseType = z.infer<typeof CreateDatabaseSchema>
+
+export const CreateVolumeSchema = z.object({
+  projectId: z.string(),
+  environmentId: z.string(),
+  serviceId: z.string().optional().nullable(),
+  mountPath: z.string(),
+})
+export type CreateVolumeType = z.infer<typeof CreateVolumeSchema>
+
+export const CreateTcpProxySchema = z.object({
+  applicationPort: z.number(),
+  environmentId: z.string(),
+  serviceId: z.string(),
+})
+export type CreateTcpProxyType = z.infer<typeof CreateTcpProxySchema>
+
+export const ServiceInstanceDeploySchema = z.object({
+  environmentId: z.string(),
+  serviceId: z.string(),
+})
+export type ServiceInstanceDeployType = z.infer<
+  typeof ServiceInstanceDeploySchema
+>
+export const ServiceInstanceUpdateSchema = z.object({
+  environmentId: z.string(),
+  serviceId: z.string(),
+  input: z.object({
+    startCommand: z.string().nullable(),
+  }),
+})
+export type ServiceInstanceUpdateType = z.infer<
+  typeof ServiceInstanceUpdateSchema
+>

@@ -131,3 +131,12 @@ hide-scroll-bar {
   word-break: break-all;
   overflow-wrap: anywhere;
 }
+
+/* react flow controls overrides */
+.react-flow__panel .react-flow__controls-button {
+  background-color: #1c1f2b;
+  border-bottom: 1px solid #2a2d3e;
+}
+.react-flow__panel .react-flow__controls-button:hover {
+  background-color: #1c1f2b;
+}

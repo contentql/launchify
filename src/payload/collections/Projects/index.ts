@@ -1,12 +1,10 @@
+// import { assignUserId } from './field-level-hooks/assignUserId'
 import { User } from '@payload-types'
 import { CollectionConfig } from 'payload'
 
 import { isAdminOrCurrentUser } from './access'
-import { createGhostTemplate } from './hooks/createGhostTemplate'
-import { createService } from './hooks/createService'
-import { deleteRailwayProject } from './hooks/deleteRailwayProject'
-
-// import { assignUserId } from './field-level-hooks/assignUserId'
+import { deployTemplate } from './hooks/deployTemplate'
+import { updateService } from './hooks/updateService'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -21,8 +19,9 @@ export const Projects: CollectionConfig = {
   },
 
   hooks: {
-    beforeChange: [createGhostTemplate, deleteRailwayProject],
-    afterChange: [createService],
+    beforeChange: [deployTemplate],
+    afterChange: [updateService],
+    // afterChange: [createService, sendEmailAfterProjectCreation],
   },
 
   fields: [
@@ -45,12 +44,6 @@ export const Projects: CollectionConfig = {
         description: 'Description of the railway project.',
         placeholder: 'Enter the Description of the railway project',
       },
-    },
-    {
-      name: 'template',
-      label: 'Template',
-      type: 'text',
-      required: true,
     },
     {
       type: 'join',
@@ -96,6 +89,36 @@ export const Projects: CollectionConfig = {
               'The unique identifier for the railway project environment.',
             placeholder: 'Auto-generated after project creation',
           },
+        },
+        {
+          name: 'project',
+          type: 'relationship',
+          relationTo: 'templates',
+          label: 'Template',
+          required: true,
+          admin: {
+            readOnly: false,
+          },
+          // filterOptions: async ({
+          //   relationTo,
+          //   siblingData,
+          //   user,
+          //   data,
+          //   id,
+          // }) => {
+          //   const siteSettings = await payload.findGlobal({
+          //     slug: 'site-settings',
+          //   })
+          //   // if (relationTo === 'templates') {
+          //   //   return {
+          //   //     'contest.value': {
+          //   //       equals: id,
+          //   //     },
+          //   //   }
+          //   // }
+
+          //   return true
+          // },
         },
         {
           name: 'deleted',

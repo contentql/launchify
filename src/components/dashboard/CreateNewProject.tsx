@@ -13,6 +13,7 @@ import {
 } from '../common/Select'
 import { Textarea } from '../common/Textarea'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Template } from '@payload-types'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import slugify from 'slugify'
@@ -35,7 +36,7 @@ const CreateNewProject = ({
   templates,
 }: {
   className?: string
-  templates: string[]
+  templates: Template[]
 }) => {
   const [open, setOpen] = useState(false)
   const trpcUtils = trpc.useUtils()
@@ -162,10 +163,12 @@ const CreateNewProject = ({
                 <Controller
                   name='template'
                   control={control}
+                  defaultValue={templates?.[0]?.id || ''}
                   render={({ field }) => (
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}>
+                      defaultValue={field.value}
+                      disabled={templates?.length <= 1}>
                       <SelectTrigger className='mt-2 w-full'>
                         <SelectValue placeholder='Select template' />
                       </SelectTrigger>
@@ -176,8 +179,8 @@ const CreateNewProject = ({
                             <SelectItem
                               className='capitalize'
                               key={index}
-                              value={template}>
-                              <p className='capitalize'>{template}</p>
+                              value={template?.id}>
+                              <p className='capitalize'>{template?.title}</p>
                             </SelectItem>
                           ))}
                         </SelectGroup>

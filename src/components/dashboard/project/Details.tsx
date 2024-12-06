@@ -2,6 +2,7 @@ import { Service } from '@payload-types'
 import { Boxes, Globe, GlobeLock, Settings } from 'lucide-react'
 import Link from 'next/link'
 
+import { Skeleton } from '@/components/common/Skeleton'
 import { formatDate } from '@/utils/dateFormatter'
 
 import CopyToClipboard from './CopyToClipboard'
@@ -59,24 +60,40 @@ const Details = ({ service }: { service: Service }) => {
         <div className='ml-8 w-full space-y-2 pt-2 text-sm md:w-2/3'>
           <div className='grid grid-cols-3'>
             <p className='col-span-1 '>ProjectId</p>
-            <p className='col-span-2'>{service?.projectId}</p>
+            <div className='col-span-2'>
+              {service?.projectId ? (
+                service?.projectId
+              ) : (
+                <Skeleton className='h-full w-full' />
+              )}
+            </div>
           </div>
           <div className='grid grid-cols-3'>
             <p className='col-span-1  text-base-content'>serviceId</p>
-            <p className='col-span-2 text-base-content'>{service?.serviceId}</p>
+            <div className='col-span-2 text-base-content'>
+              {service?.serviceId ? (
+                service?.serviceId
+              ) : (
+                <Skeleton className='h-full w-full' />
+              )}
+            </div>
           </div>
 
           <div className='grid grid-cols-3'>
             <p className='col-span-1 text-base-content'>Created</p>
-            <p className='col-span-2 text-base-content'>
-              {formatDate(service?.createdAt)}
-            </p>
+            <div className='col-span-2 text-base-content'>
+              {service?.createdAt ? (
+                formatDate(service?.createdAt)
+              ) : (
+                <Skeleton className='h-full w-full' />
+              )}
+            </div>
           </div>
           <div className='grid grid-cols-3'>
             <p className='col-span-1 '>Status</p>
             <p className='col-span-2 inline-flex items-center gap-x-2 uppercase'>
               {Component[service?.deploymentStatus!]}
-              <p className='capitalize'> {service?.deploymentStatus}</p>
+              <span className='capitalize'> {service?.deploymentStatus}</span>
             </p>
           </div>
         </div>

@@ -366,25 +366,11 @@ export const siteSettings: GlobalConfig = {
           label: 'Project Configuration',
           fields: [
             {
-              type: 'select',
-              name: 'templates',
-              label: 'Templates',
+              name: 'Projects',
+              type: 'relationship',
+              relationTo: 'templates',
               hasMany: true,
-              defaultValue: 'GHOST',
-              options: [
-                {
-                  label: 'Ghost',
-                  value: 'GHOST',
-                },
-                {
-                  label: 'Strapi',
-                  value: 'STRAPI',
-                },
-                {
-                  label: 'WordPress',
-                  value: 'WORDPRESS',
-                },
-              ],
+              required: true,
             },
           ],
         },

@@ -184,10 +184,10 @@ const Variables = ({
     })
   }
 
-  const length = added?.length + edited.length + deleted.length
+  const length = added?.length + edited?.length + deleted?.length
   return (
     <div className='pt-8 text-base-content'>
-      {(added?.length > 0 || edited.length > 0 || deleted.length > 0) && (
+      {(added?.length > 0 || edited?.length > 0 || deleted?.length > 0) && (
         <>
           <motion.div
             initial={{ opacity: 0, y: '-40px' }}
@@ -389,7 +389,7 @@ const Variables = ({
           deploymentStatus === 'DEPLOYING') ? (
           <LoadingSkeleton />
         ) : (
-          variables.map((variable, index) => (
+          variables?.map((variable, index) => (
             <div
               className={cn(
                 'group grid grid-cols-3 items-center gap-x-2 rounded-md border border-transparent px-2 py-1 hover:border hover:border-primary/25 hover:bg-primary/5',

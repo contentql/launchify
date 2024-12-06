@@ -15,6 +15,7 @@ export interface Config {
     media: Media;
     projects: Project;
     services: Service;
+    templates: Template;
     pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -127,7 +128,6 @@ export interface Project {
   id: string;
   name?: string | null;
   projectDescription?: string | null;
-  template: string;
   Services?: {
     docs?: (string | Service)[] | null;
     hasNextPage?: boolean | null;
@@ -138,6 +138,7 @@ export interface Project {
   } | null;
   projectId?: string | null;
   environmentId?: string | null;
+  project: string | Template;
   deleted?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -177,6 +178,38 @@ export interface Service {
   customDomain?: string | null;
   deploymentStatus?: ('NOT_YET_DEPLOYED' | 'SUCCESS' | 'ERROR' | 'DEPLOYING') | null;
   deleted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "templates".
+ */
+export interface Template {
+  id: string;
+  title: string;
+  services?:
+    | {
+        type: 'github' | 'docker' | 'database';
+        image?: string | null;
+        addStartCommand?: boolean | null;
+        startCommand?: string | null;
+        repo?: string | null;
+        databaseType?: ('MONGODB' | 'REDIS' | 'MYSQL' | 'POSTGRESQL' | 'MARIADB') | null;
+        name?: string | null;
+        icon?: (string | null) | Media;
+        environmentVariables?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -365,6 +398,10 @@ export interface PayloadLockedDocument {
         value: string | Service;
       } | null)
     | ({
+        relationTo: 'templates';
+        value: string | Template;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: string | Page;
       } | null);
@@ -520,7 +557,7 @@ export interface SiteSetting {
       | null;
     copyright?: string | null;
   };
-  templates?: ('GHOST' | 'STRAPI' | 'WORDPRESS')[] | null;
+  Projects: (string | Template)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }

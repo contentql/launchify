@@ -2,7 +2,7 @@
 
 import Container from '../common/Container'
 import Loading from '../common/Loading'
-import { Project, SiteSetting } from '@payload-types'
+import { Project, SiteSetting, Template } from '@payload-types'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
@@ -22,7 +22,7 @@ const DashboardView = ({ metadata }: { metadata: SiteSetting }) => {
       initialData: metadata,
     },
   )
-  const { templates } = siteSettings
+  const { Projects } = siteSettings
 
   const {
     data: projects,
@@ -55,16 +55,16 @@ const DashboardView = ({ metadata }: { metadata: SiteSetting }) => {
 
   return (
     <Container>
-      <div className='relative space-y-4 px-2'>
+      <div className='relative space-y-4 px-2 pb-8 pt-24'>
         <div className='flex items-center justify-between'>
           <h2 className='text-left text-2xl font-bold'>Your blog sites</h2>
-          <CreateNewProject templates={templates as string[]} />
+          <CreateNewProject templates={Projects as Template[]} />
         </div>
         <List
           projects={allProjects as Project[]}
           isLoading={isLoading}
           isProjectsEmpty={isProjectsEmpty}
-          templates={templates as string[]}
+          templates={Projects as Template[]}
         />
         <div className='mt-4 w-full' ref={ref}>
           {isFetchingNextPage && (

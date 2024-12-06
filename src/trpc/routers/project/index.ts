@@ -26,7 +26,7 @@ export const projectRouter = router({
           user,
           limit,
           page: cursor,
-          depth: 0,
+          depth: 10,
           sort: '-createdAt',
           where: {
             and: [
@@ -89,7 +89,7 @@ export const projectRouter = router({
           data: {
             name: name,
             projectDescription: description,
-            template,
+            project: template,
             user: { relationTo: 'users', value: user?.id },
           },
         })

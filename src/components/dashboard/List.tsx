@@ -19,7 +19,7 @@ import {
 import Input from '../common/Input'
 import { Skeleton } from '../common/Skeleton'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Project } from '@payload-types'
+import { Project, Template } from '@payload-types'
 import { EllipsisVertical, SquarePen, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -42,7 +42,7 @@ const List = ({
   projects: Project[]
   isLoading: boolean
   isProjectsEmpty: boolean
-  templates: string[]
+  templates: Template[]
 }) => {
   return (
     <div>
@@ -53,7 +53,7 @@ const List = ({
           <Skeleton className='h-48 w-full' />
         </div>
       ) : isProjectsEmpty ? (
-        <EmptyProjects templates={templates as string[]} />
+        <EmptyProjects templates={templates as Template[]} />
       ) : (
         <div className='z-10 grid grid-cols-1 items-center gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {projects?.map((site, index) => <ListItem key={index} site={site} />)}

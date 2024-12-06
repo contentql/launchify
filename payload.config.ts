@@ -13,6 +13,7 @@ import { Media } from '@/payload/collections/Media'
 import { Pages } from '@/payload/collections/Pages'
 import { Projects } from '@/payload/collections/Projects'
 import { Services } from '@/payload/collections/Services'
+import { Templates } from '@/payload/collections/Templates'
 import { Users } from '@/payload/collections/Users'
 import { siteSettings } from '@/payload/globals/SiteSettings'
 import { generateBreadcrumbsUrl } from '@/utils/generateBreadcrumbsUrl'
@@ -71,7 +72,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Projects, Services, Pages],
+  collections: [Users, Media, Projects, Services, Templates, Pages],
   globals: [siteSettings],
   db: mongooseAdapter({
     url: env.DATABASE_URI,

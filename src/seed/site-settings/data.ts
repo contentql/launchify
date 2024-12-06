@@ -10,8 +10,8 @@ export type ImageType = {
 
 export const siteSettingsData: siteSettingsDataType = {
   general: {
-    title: 'Ygency',
-    description: 'Ygency is a theme part of contentql',
+    title: 'Launchify',
+    description: 'Launchify is a theme part of contentql',
     faviconUrl: '',
     ogImageUrl: '',
   },
@@ -116,6 +116,14 @@ export const siteSettingsData: siteSettingsDataType = {
     ],
     copyright: '© Lauchify - All rights reserved.',
   },
+  Projects: [
+    {
+      id: '',
+      title: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ],
 }
 
 export const logo: ImageType = {

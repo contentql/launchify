@@ -13,9 +13,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <Navbar metadata={metadata} user={user} />
-      <div className='mx-auto grid min-h-screen w-full grid-rows-[1fr_auto] text-base-content'>
-        <div>{children}</div>
-      </div>
+      <div>{children}</div>
     </div>
   )
 }

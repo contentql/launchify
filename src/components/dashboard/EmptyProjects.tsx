@@ -1,6 +1,8 @@
+import { Template } from '@payload-types'
+
 import CreateNewProject from './CreateNewProject'
 
-const EmptyProjects = ({ templates }: { templates: string[] }) => {
+const EmptyProjects = ({ templates }: { templates: Template[] }) => {
   return (
     <div className='flex h-[calc(100vh-18rem)]  w-full items-center justify-center'>
       <div className='empty-project-card relative flex max-w-lg flex-col items-center justify-center gap-y-4 rounded-md border-none bg-base-200 p-8  text-center shadow-lg'>
@@ -13,7 +15,7 @@ const EmptyProjects = ({ templates }: { templates: string[] }) => {
         </p>
         <CreateNewProject
           className='w-full'
-          templates={templates as string[]}
+          templates={templates as Template[]}
         />
       </div>
     </div>

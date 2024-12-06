@@ -14,6 +14,9 @@ const seed = async ({ spinner }: { spinner: Ora }) => {
       collection: 'pages',
     })
 
+    const { docs: templates } = await payload.find({
+      collection: 'templates',
+    })
     const logoImageSeedResult = await payload.create({
       collection: 'media',
       data: { alt: logo?.alt },
@@ -69,6 +72,9 @@ const seed = async ({ spinner }: { spinner: Ora }) => {
           },
         ),
       },
+      Projects: siteSettingsData?.Projects?.map((project, index) => {
+        return templates.at(-1)?.id!
+      }),
     }
 
     const result = await payload.updateGlobal({

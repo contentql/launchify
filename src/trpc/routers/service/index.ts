@@ -1,4 +1,5 @@
 import configPromise from '@payload-config'
+import { Service } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
@@ -22,7 +23,7 @@ export const serviceRouter = router({
             },
           },
         })
-        return { services: docs, totalServices: totalDocs }
+        return { services: docs as Service[] }
       } catch (error) {
         console.log('Error while fetching services', error)
         throw new TRPCError({
